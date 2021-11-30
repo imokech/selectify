@@ -3,12 +3,10 @@
 Selectify is a jQuery-based replacement for select boxes. It supports searching, remote data sets.
 
 ## Use Casses
-----------
 - select box with checkbox for each option
 - search in select options
 
 ## How To Use
-----------
 - Add css and js file in your project
 - Add "selectify" class to select tag
 - Enable/Disable search box via "search" option in config object  *(dafault is true)* 
@@ -20,7 +18,6 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
  *(If user just can select one option, selectify displays radio button)* 
 
 ## Example #1
-----------
 ```htm
 <select id="unique-select" class="selectify">
     <option>1</option>
@@ -35,7 +32,6 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
 ```
 
 ## Example #2
-----------
 ```htm
 <select id="unique-select" class="selectify" multiple>
     <option>1</option>
@@ -56,7 +52,6 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
 ```
 
 ## Example #3
-----------
 ```htm
 <select id="unique-select" class="selectify" multiple>
     <option data-count="34">1</option>
