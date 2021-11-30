@@ -49,7 +49,7 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
         search: false,
         language: {
             not_found: 'There is no item',
-            placceholder: 'Search option'
+            placeholder: 'Search option'
         }
     });
 </script>
@@ -70,7 +70,7 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
         search: true,
         language: {
             not_found: 'There is no item',
-            placceholder: 'Search option'
+            placeholder: 'Search option'
         }
     });
 </script>
