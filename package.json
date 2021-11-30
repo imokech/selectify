@@ -1,0 +1,25 @@
+{
+  "name": "selectify",
+  "version": "1.0.0",
+  "description": "Multi select checkbox options",
+  "main": "js/selectify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jQuery": "^3.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imokech/selectify.git"
+  },
+  "keywords": [
+    "selectify"
+  ],
+  "author": "imokech and Iman Abbasi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imokech/selectify/issues"
+  },
+  "homepage": "https://github.com/imokech/selectify#readme"
+}
