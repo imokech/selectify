@@ -4,7 +4,7 @@
 Selectify is a jQuery-based replacement for select boxes. It supports searching, remote data sets.
 
 ## Install 
-`` $ npm install @bamblehorse/tiny ``
+`` $ npm install @mokech/selectify ``
 ## Use Casses
 - select box with checkbox for each option
 - search in select options
