@@ -1,7 +1,10 @@
 # Selectify
+<img alt="npm" src="https://img.shields.io/npm/v/@mokech/selectify">
 
 Selectify is a jQuery-based replacement for select boxes. It supports searching, remote data sets.
 
+## Install 
+`` $ npm install @bamblehorse/tiny ``
 ## Use Casses
 - select box with checkbox for each option
 - search in select options
@@ -15,10 +18,10 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
   - placeholder : search box placeholder
 - Add "data-count" attribute for displaying count of item after option text
 - If user can select multiple options add "multiple" to select tag and displays checkbox
- *(If user just can select one option, selectify displays radio button)* 
+ *(If user is limited to select one option, selectify displays radio button)* 
 
 ## Example #1
-```htm
+```html
 <select id="unique-select" class="selectify">
     <option>1</option>
     <option>2</option>
@@ -32,7 +35,7 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
 ```
 
 ## Example #2
-```htm
+```html
 <select id="unique-select" class="selectify" multiple>
     <option>1</option>
     <option>2</option>
@@ -45,14 +48,14 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
         search: false,
         language: {
             not_found: 'There is no item',
-            placeholder: 'Search option'
+            placeholder: 'Search options'
         }
     });
 </script>
 ```
 
 ## Example #3
-```htm
+```html
 <select id="unique-select" class="selectify" multiple>
     <option data-count="34">1</option>
     <option data-count="69">2</option>
@@ -65,7 +68,7 @@ Selectify is a jQuery-based replacement for select boxes. It supports searching,
         search: true,
         language: {
             not_found: 'There is no item',
-            placeholder: 'Search option'
+            placeholder: 'Search options'
         }
     });
 </script>

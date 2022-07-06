@@ -12,13 +12,13 @@
         const $selfs = [];
 
         $(this).each(function (s, selectify) {
-            // Constants
+            // Argument
             let $self = {
                 name: $(selectify).attr('name') || '',
                 selector: $(selectify),
                 config: config,
-                selected: $(selectify).attr('multiple') ? [] : null,
-                multiple: $(selectify).attr('multiple'),
+                selected: [],
+                multiple: $(selectify).attr('multiple') ? true : false,
                 options: [],
                 results: [],
                 utils: {
@@ -42,28 +42,43 @@
                             if ($self.utils.compareObjects(haystack[i], needle)) return true;
                         return false;
                     },
-                    registerEvents: function () {
-                        $self.selector.next().find('.selectify-option').unbind('click').click(function () {
+                    // Rerender on Changing
+                    onSelectChange: function(){
+                        $self.selected = [];
+                        if (!$self.multiple) {
+                            $self.selected.push( $self.selector.val() );
+                        } else {
+                            $( $self.selector.val() ).each(function(i, selectedValue){
+                                $self.selected.push(selectedValue);
+                            });
+                        }
+                        $self.render();
+                    },
+                    // Initial rendered HTML
+                    onHTMLChange: function(){
+                        let selectorValue = Array.isArray( $self.selector.val() ) ? $self.selector.val() : [$self.selector.val()];
+                        $( selectorValue ).each(function(i, selectedValue){
+                            $self.selected.push(selectedValue);
+                        });
+                        if (!$self.multiple && $self.selected.length > 0) {
+                            $self.selected = [$self.selected[$self.selected.length - 1]];
+                        }
+                        $self.render();
+                    },
+                    registerEvents: function(){
+                        $self.selector.next().find('.selectify-option').unbind('click').click(function (e) {
                             let selectedValue = $(this).attr('data-value');
-                            if ($self.multiple) {
-                                if ($self.selected.includes(selectedValue)) {
-                                    $self.selected = $self.selected.filter(function (value) {
-                                        return value !== selectedValue;
-                                    });
-                                } else {
-                                    $self.selected.push(selectedValue);
-                                }
+                            let selectedIndex = $self.selected.indexOf(selectedValue);
+                            if(selectedIndex >= 0) {
+                                $self.selected.splice(selectedIndex, 1);
+                            } else if ($self.multiple) {
+                                $self.selected.push(selectedValue);
                             } else {
-                                if ($self.selected == selectedValue) {
-                                    $self.selected = null;
-                                } else {
-                                    $self.selected = selectedValue;
-                                }
+                                $self.selected = [selectedValue];
                             }
-                            $self.selector.val($self.selected).change();
+                            $self.selector.val( $self.selected );
                             $self.render();
                         });
-
                     }
                 },
                 render: function () {
@@ -71,9 +86,7 @@
                     if ($self.results.length) {
                         $($self.results).each(function (index, option) {
                             if (
-                                (!$self.multiple && $self.selected == option.value) ||
-                                ($self.multiple && $self.selected.includes(option.value)) ||
-                                (option.hasOwnProperty('selected') && option.selected)
+                                $self.selected.includes(option.value)
                             ) {
                                 $self.selector.next().find('.select-area').find('.selectify-options').append('<div class="selectify-option selected" data-value="' + option.value + '"><input name="' + $self.name + 'Checkbox[]" type="' + ( $self.multiple ? 'checkbox' : 'radio') + '" value="' + option.value + '" checked>' + option.name + (option.count ? '<small class="selectify-option-count">' + option.count + '</small>' : '') +'</div>');
                             } else {
@@ -83,7 +96,6 @@
                     } else {
                         $self.selector.next().find('.select-area').append('<div class="selectify-alert">' + config.languages.not_found + '</div>');
                     }
-
                     $self.utils.registerEvents();
                 }
             }
@@ -102,8 +114,10 @@
                     name: $(option).text(),
                     value: $(option).val(),
                     count: $(option).attr('data-count'),
-                    selected: $(option).attr('selected'),
                 });
+                if ($(option).attr('selected')) {
+                    $self.selected.push($(option).val())
+                }
             });
 
             // Events
@@ -124,17 +138,9 @@
                 });
                 $self.render();
             });
+
             $self.selector.change(function () {
-                $self.selected = $self.multiple ? [] : null;
-                if ($self.multiple) {
-                    $( $self.selector.val() ).each(function(i, selectedValue){
-                        $self.selected.push(selectedValue);
-                    });
-                }
-                else{
-                    $self.selected = $self.selector.val();
-                }
-                $self.render();
+                $self.utils.onSelectChange();
             });
 
             $self.render();

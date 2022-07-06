@@ -1,6 +1,6 @@
 {
-  "name": "selectify",
-  "version": "1.0.0",
+  "name": "@mokech/selectify",
+  "version": "1.0.1",
   "description": "Multi select checkbox options",
   "main": "js/selectify.js",
   "scripts": {
